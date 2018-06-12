@@ -1,0 +1,14 @@
+<table>
+    <tr>
+        <td>Title</td>
+        <td>Note</td>
+        <td>Completed</td>
+    </tr>
+    <% @tasks.each do |task| %>
+        <tr>
+            <td><%= task.title %></td>
+            <td><%= task.note %></td>
+            <td><%= task.completed %></td>
+        </tr>
+    <% end %>
+</table>

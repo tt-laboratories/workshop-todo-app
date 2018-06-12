@@ -1,0 +1,9 @@
+<%= form_for(@task) do |f| %>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+    
+    <%= f.label :note %>
+    <%= f.text_area :note %>
+    
+    <%= f.submit %>
+<%end%>
