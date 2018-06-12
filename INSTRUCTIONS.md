@@ -39,5 +39,42 @@ $ rails generate model Task title:string note:text completed:date
 ### Run database migration
 
 ```
-$ rake db:migrate
+$ rails db:migrate
 ```
+
+### Create a create action
+
+#### Steps
+
+- Route to the form
+- Create action
+- View
+
+#### Route for task resources
+
+Add routes for the task resource to `config/routes.rb`
+
+```
+resources :tasks
+```
+
+List all available routes of the application
+
+```
+$ rails routes
+```
+
+#### Create task controller
+
+Create a file `app/controllers/tasks_controller.rb`.
+
+```ruby
+class TasksController < ApplicationController
+  def new
+  end
+end
+```
+
+#### Open application layout
+
+Open `/views/layouts/application.html.erb`
