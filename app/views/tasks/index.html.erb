@@ -1,14 +1,18 @@
-<table>
-    <tr>
-        <td>Title</td>
-        <td>Note</td>
-        <td>Completed</td>
-    </tr>
-    <% @tasks.each do |task| %>
+<table class="table table-bordered table-striped table-hover">
+    <thead class="thead-light">
         <tr>
-            <td><%= task.title %></td>
-            <td><%= task.note %></td>
-            <td><%= task.completed %></td>
+            <th>Title</th>
+            <th>Note</th>
+            <th>Completed</th>
         </tr>
-    <% end %>
+    </thead>
+    <tbody>
+        <% @tasks.each do |task| %>
+            <tr>
+                <td><strong><%= task.title %></strong></td>
+                <td><%= task.note.truncate(20) %></td>
+                <td><%= task.completed %></td>
+            </tr>
+        <% end %>
+    </tbody>
 </table>
