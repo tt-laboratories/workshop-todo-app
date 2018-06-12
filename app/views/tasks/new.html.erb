@@ -1,9 +1,7 @@
-<%= form_for(@task) do |f| %>
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+<%= simple_form_for(@task, wrapper: :horizontal_form) do |f| %>
+    <%= f.input :title %>
     
-    <%= f.label :note %>
-    <%= f.text_area :note %>
+    <%= f.input :note %>
     
-    <%= f.submit %>
+    <%= f.button :submit, class: 'btn btn-primary'%>
 <%end%>
