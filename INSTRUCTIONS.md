@@ -362,11 +362,39 @@ def update
 end
 ```
 
-
 ### Task complete
+add route `config/routes.rb`
+```ruby
+Rails.application.routes.draw do
+  resources :tasks do
+    member do
+      patch :toggle_complete
+    end
+  end
+end
+
+```
 
 
+add Buttons into `app/views/tasks/index.html.erb`
+```html
+<% if task.completed? %>
+  <td><%= link_to('Uncomplete', toggle_complete_task_path(task, completed: false), method: :patch)%></td>
+<% else %>
+  <td><%= link_to('Complete', toggle_complete_task_path(task, completed: true), method: :patch)%></td>
+<% end %>
+```
+add toggle_complete action to `tasks_controller.rb`
 
-#### Open application layout
-
-Open `/views/layouts/application.html.erb`
+```ruby
+def toggle_complete
+  @task = Task.find(params[:id])
+  if params[:completed] == 'true'
+    @task.completed = Time.now
+  else
+    @task.completed = nil
+  end
+  @task.save
+  redirect_to tasks_path
+end
+```
