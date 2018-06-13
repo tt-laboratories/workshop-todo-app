@@ -28,7 +28,7 @@ $ bundle install
 ### Run server
 Click the play-icon in the menu-bar and select `run`. The run-tab will show you a preview-url which returns the app.
 
-
+## Build The App
 
 ### Create task model
 
@@ -275,6 +275,7 @@ Update `app/views/tasks/new.html.erb`
 ```
 
 ### Task show
+step-4 
 
 Add link to Task show view in `index.html.erb`
 ```html
