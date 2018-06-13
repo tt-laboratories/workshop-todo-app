@@ -273,9 +273,47 @@ Update `app/views/tasks/new.html.erb`
     <%= f.button :submit, class: 'btn btn-primary'%>
 <%end%>
 ```
-### Tasks#destroy
 
 ### Task show
+
+Add link to Task show view in `index.html.erb`
+```html
+  <td><strong><%= link_to(task.title, task)%> </strong></td>
+```
+
+add show action to `TasksController.rb`
+```ruby
+def show
+  @task = Task.find(params[:id])
+end
+```
+
+add show tamplate `views/tasks/show.html.erb` (new file)
+```html
+<h2>Task:</h2>
+
+<h2><%= @task.title %></h2>
+<p><%= @task.note %></p>
+<%= @task.completed %>
+
+<%= link_to('Back', tasks_path) %>
+
+```
+
+### Tasks#destroy
+add destroy button to task `views/tasks/show.html.erb`
+```html
+<%= link_to('Delete', task_path(@task), method: :delete, data: {confirm: 'are you sure'}) %>
+```
+
+add desroy action to `TasksController.rb`
+```ruby
+def destroy
+  @task = Task.find(params[:id])
+  @task.destroy
+  redirect_to tasks_path
+end
+```
 
 ### Task edit
 
