@@ -5,4 +5,5 @@
 <%= @task.completed %>
 
 <%= link_to('Back', tasks_path) %>
+<%= link_to('Edit', edit_task_path(@task)) %>
 <%= link_to('Delete', task_path(@task), method: :delete, data: {confirm: 'are you sure'}) %>

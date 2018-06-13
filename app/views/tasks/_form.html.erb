@@ -1,0 +1,7 @@
+<%= simple_form_for(@task, wrapper: :horizontal_form) do |f| %>
+    <%= f.input :title %>
+
+    <%= f.input :note %>
+
+    <%= f.button :submit, class: 'btn btn-primary'%>
+<%end%>
