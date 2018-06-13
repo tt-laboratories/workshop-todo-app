@@ -4,6 +4,7 @@
             <th>Title</th>
             <th>Note</th>
             <th>Completed</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -12,6 +13,11 @@
                 <td><strong><%= link_to(task.title, task) %> </strong></td>
                 <td><%= task.note.truncate(20) %></td>
                 <td><%= task.completed %></td>
+                <% if task.completed? %>
+                    <td><%= link_to('Uncomplete', toggle_complete_task_path(task, completed: false), method: :patch)%></td>
+                <% else %>
+                    <td><%= link_to('Complete', toggle_complete_task_path(task, completed: true), method: :patch)%></td>
+                <% end %>
             </tr>
         <% end %>
     </tbody>
