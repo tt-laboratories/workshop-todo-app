@@ -302,7 +302,7 @@ add show tamplate `views/tasks/show.html.erb` (new file)
 ```
 
 ### Tasks#destroy
-add destroy button to task `views/tasks/show.html.erb`
+add destroy button to task `app/views/tasks/show.html.erb`
 ```html
 <%= link_to('Delete', task_path(@task), method: :delete, data: {confirm: 'are you sure'}) %>
 ```
@@ -317,6 +317,51 @@ end
 ```
 
 ### Task edit
+add **edit** button to task `show.html.erb`
+```html
+<%= link_to('Edit', edit_task_path(@task)) %>
+```
+
+add edit action to `tasks_controller.rb`
+```rb
+def edit
+  @task = Task.find(params[:id])
+end
+```
+extract form into its own partial (template) `app/views/tasks/_form.html.erb`
+```html
+<%= simple_form_for(@task, wrapper: :horizontal_form) do |f| %>
+    <%= f.input :title %>
+
+    <%= f.input :note %>
+
+    <%= f.button :submit, class: 'btn btn-primary'%>
+<%end%>
+```
+
+add edit template `app/views/tasks/edit.html.erb`
+```html
+<h2>Edit task</h2>
+<%= render partial: 'form' %>
+
+```
+
+use the new partial in `app/views/tasks/new.html.erb'
+```html
+<h2>Add a new task</h2>
+<%= render partial: 'form' %>
+
+```
+
+add update action to `tasls_controller.rb`
+```ruby
+def update
+  @task = Task.find(params[:id])
+  @task.update(task_params)
+  redirect_to @task
+end
+```
+
 
 ### Task complete
 
