@@ -159,7 +159,7 @@ Create an index view in `app/views/index.html.erb`:
         <% end %>
     </tbody>
 </table>
-``
+```
 
 ### Make it pretty
 
