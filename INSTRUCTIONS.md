@@ -13,6 +13,8 @@ $ gem install rails
 $ rails new <app_name>
 ```
 
+Check what has been created by the generator (router, controller, database.yml, Gemfile, ...).
+
 ### Go into created app-directory
 
 ```
@@ -26,7 +28,16 @@ $ bundle install
 ```
 
 ### Run server
-Click the play-icon in the menu-bar and select `run`. The run-tab will show you a preview-url which returns the app.
+
+When using codenvy:
+
+- Click the play-icon in the menu-bar and select `run`
+- Then run-tab will show you a preview-url which returns the app
+
+If are using rails in your command line
+
+- Type `rails server`
+- Visit `http://localhost:3000` in your browser
 
 ## Build The App
 
@@ -45,6 +56,8 @@ $ rails db:migrate
 ### Create a create action
 
 #### Steps
+
+We will create the following MVC components:
 
 - Route to the form
 - Create action
@@ -151,6 +164,14 @@ Create an index view in `app/views/index.html.erb`:
         <% end %>
     </tbody>
 </table>
+```
+
+### Set index as root path
+
+Add the following root definition to the `config/routes.rb`
+
+```
+root to: 'tasks#index'
 ```
 
 ### Make it pretty
