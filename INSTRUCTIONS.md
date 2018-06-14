@@ -80,9 +80,9 @@ end
 Prepare task variable:
 
 ```ruby
-  def new
-    @task = Task.new
-  end
+def new
+  @task = Task.new
+end
 ```
 
 Create a file `app/views/tasks/new.html.erb`:
@@ -125,9 +125,9 @@ end
 Add index action to tasks controller:
 
 ```ruby
-  def index
-    @tasks = Task.all
-  end
+def index
+  @tasks = Task.all
+end
 ```
 
 Create an index view in `app/views/index.html.erb`:
@@ -235,16 +235,16 @@ Restart server.
 Update `application.html.erb`:
 
 ```html
-    <div class="container">
-        <div class="jumbotron">
-            <h1>Todo-App
-                <small>Tutorial application</small>
-            </h1>
-            <%= link_to 'New task', new_task_path, class: 'btn btn-primary' %>
-        </div>
-        
-        <%= yield %>
+<div class="container">
+    <div class="jumbotron">
+        <h1>Todo-App
+            <small>Tutorial application</small>
+        </h1>
+        <%= link_to 'New task', new_task_path, class: 'btn btn-primary' %>
     </div>
+
+    <%= yield %>
+</div>
 ```
 
 ### Make form pretty
@@ -279,7 +279,7 @@ step-4
 
 Add link to Task show view in `index.html.erb`
 ```html
-  <td><strong><%= link_to(task.title, task)%> </strong></td>
+<td><strong><%= link_to(task.title, task)%> </strong></td>
 ```
 
 add show action to `TasksController.rb`
