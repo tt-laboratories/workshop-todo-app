@@ -84,21 +84,14 @@ Create a file `app/controllers/tasks_controller.rb`.
 ```ruby
 class TasksController < ApplicationController
   def new
+    @task = Task.new
   end
 end
 ```
 
 #### Create a task form
 
-Prepare task variable:
-
-```ruby
-def new
-  @task = Task.new
-end
-```
-
-Create a file `app/views/tasks/new.html.erb`:
+Create a view in `app/views/tasks/new.html.erb`:
 
 ```html
 <%= form_for(@task) do |f| %>
@@ -113,6 +106,8 @@ Create a file `app/views/tasks/new.html.erb`:
 ```
 
 #### Create a create action
+
+Update the tasks controller:
 
 ```ruby
 class TasksController < ApplicationController
@@ -164,15 +159,7 @@ Create an index view in `app/views/index.html.erb`:
         <% end %>
     </tbody>
 </table>
-```
-
-### Set index as root path
-
-Add the following root definition to the `config/routes.rb`
-
-```
-root to: 'tasks#index'
-```
+``
 
 ### Make it pretty
 
@@ -184,7 +171,7 @@ Add bootstrap gem to `Gemfile`:
 gem 'bootstrap', '~> 4.1.1'
 ```
 
-Install required packages:
+Install newly added packages:
 
 ```
 $ bundle install
@@ -200,7 +187,7 @@ Import bootstrap in `application.scss`:
 
 Restart server.
 
-##### Style index view:
+##### Style tasks index view:
 
 ```html
 <table class="table table-bordered table-striped table-hover">
@@ -268,7 +255,7 @@ Update `application.html.erb`:
 </div>
 ```
 
-### Make form pretty
+#### Make form pretty
 
 Add simple_form to Gemfile
 
@@ -295,12 +282,20 @@ Update `app/views/tasks/new.html.erb`
 <%end%>
 ```
 
+#### Set index as root path
+
+Add the following root definition to the `config/routes.rb`
+
+```
+root to: 'tasks#index'
+```
+
 ### Task show
 step-4 
 
-Add link to Task show view in `index.html.erb`
+Add link to Task show view in `app/views/tasks/index.html.erb`
 ```html
-<td><strong><%= link_to(task.title, task)%> </strong></td>
+<td><strong><%= link_to(task.title, task)%></strong></td>
 ```
 
 add show action to `TasksController.rb`
@@ -310,7 +305,7 @@ def show
 end
 ```
 
-add show tamplate `views/tasks/show.html.erb` (new file)
+add show template `app/views/tasks/show.html.erb` (new file)
 ```html
 <h2>Task:</h2>
 
@@ -319,7 +314,6 @@ add show tamplate `views/tasks/show.html.erb` (new file)
 <%= @task.completed %>
 
 <%= link_to('Back', tasks_path) %>
-
 ```
 
 ### Tasks#destroy
@@ -328,7 +322,7 @@ add destroy button to task `app/views/tasks/show.html.erb`
 <%= link_to('Delete', task_path(@task), method: :delete, data: {confirm: 'are you sure'}) %>
 ```
 
-add desroy action to `TasksController.rb`
+add destroy action to TasksController:
 ```ruby
 def destroy
   @task = Task.find(params[:id])
@@ -337,19 +331,20 @@ def destroy
 end
 ```
 
-### Task edit
-add **edit** button to task `show.html.erb`
+### Tasks#edit
+add **edit** button to `app/views/tasks/show.html.erb`
 ```html
 <%= link_to('Edit', edit_task_path(@task)) %>
 ```
 
-add edit action to `tasks_controller.rb`
-```rb
+add edit action to TaskController:
+
+```ruby
 def edit
   @task = Task.find(params[:id])
 end
 ```
-extract form into its own partial (template) `app/views/tasks/_form.html.erb`
+extract form into its own partial `app/views/tasks/_form.html.erb`
 ```html
 <%= simple_form_for(@task, wrapper: :horizontal_form) do |f| %>
     <%= f.input :title %>
@@ -360,21 +355,19 @@ extract form into its own partial (template) `app/views/tasks/_form.html.erb`
 <%end%>
 ```
 
-add edit template `app/views/tasks/edit.html.erb`
+add edit view `app/views/tasks/edit.html.erb`
 ```html
 <h2>Edit task</h2>
 <%= render partial: 'form' %>
-
 ```
 
-use the new partial in `app/views/tasks/new.html.erb'
+use the new partial in tasks#new `app/views/tasks/new.html.erb'
 ```html
 <h2>Add a new task</h2>
 <%= render partial: 'form' %>
-
 ```
 
-add update action to `tasls_controller.rb`
+add update action to TasksController
 ```ruby
 def update
   @task = Task.find(params[:id])
@@ -396,7 +389,6 @@ end
 
 ```
 
-
 add Buttons into `app/views/tasks/index.html.erb`
 ```html
 <% if task.completed? %>
@@ -405,7 +397,7 @@ add Buttons into `app/views/tasks/index.html.erb`
   <td><%= link_to('Complete', toggle_complete_task_path(task, completed: true), method: :patch)%></td>
 <% end %>
 ```
-add toggle_complete action to `tasks_controller.rb`
+add toggle_complete action to TasksController:
 
 ```ruby
 def toggle_complete
