@@ -44,7 +44,7 @@ If are using rails in your command line
 ### Create task model
 
 ```
-$ rails generate model Task title:string note:text completed:date
+$ rails generate model Task title:string note:text completed_at:datetime
 ```
 
 ### Run database migration
