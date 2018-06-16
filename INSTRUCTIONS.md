@@ -154,7 +154,7 @@ Create an index view in `app/views/index.html.erb`:
             <tr>
                 <td><%= task.title %></td>
                 <td><%= task.note.truncate(20) %></td>
-                <td><%= task.completed %></td>
+                <td><%= task.completed_at %></td>
             </tr>
         <% end %>
     </tbody>
@@ -203,7 +203,7 @@ Restart server.
             <tr>
                 <td><strong><%= task.title %></strong></td>
                 <td><%= task.note.truncate(20) %></td>
-                <td><%= task.completed %></td>
+                <td><%= task.completed_at %></td>
             </tr>
         <% end %>
     </tbody>
@@ -311,7 +311,7 @@ add show template `app/views/tasks/show.html.erb` (new file)
 
 <h2><%= @task.title %></h2>
 <p><%= @task.note %></p>
-<%= @task.completed %>
+<%= @task.completed_at %>
 
 <%= link_to('Back', tasks_path) %>
 ```
@@ -403,9 +403,9 @@ add toggle_complete action to TasksController:
 def toggle_complete
   @task = Task.find(params[:id])
   if params[:completed] == 'true'
-    @task.completed = Time.now
+    @task.completed_at = Time.now
   else
-    @task.completed = nil
+    @task.completed_at = nil
   end
   @task.save
   redirect_to tasks_path
